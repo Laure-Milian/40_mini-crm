@@ -1,0 +1,26 @@
+{
+  "name": "40_mini-crm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laure-Milian/40_mini-crm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Laure-Milian/40_mini-crm/issues"
+  },
+  "homepage": "https://github.com/Laure-Milian/40_mini-crm#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "node-fs": "^0.1.7",
+    "semantic-ui-css": "^2.2.4"
+  }
+}
