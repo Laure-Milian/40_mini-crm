@@ -23,34 +23,39 @@
 		},
 
 		displayCustomersDone: function(response) {
-			console.log(response.customers);
+			console.log(response);
+			// Mustache
+			var template = $('#template').html();
+
 			var len = response.customers.length;
 
 			for (var i = 0; i < len; i++) {
-				$('#data').append('<div class="ui card"> <ul id="customer' + i +'"> </ul> </div>')
-				for (var prop in response.customers[i]) {
-					$('#customer' + i).append('<li>' + response.customers[i][prop] + '</li>')
-				}
+				var html = Mustache.to_html(template, response.customers[i]);
+				$('#data').append(html);
 			}
 		},
 
 		// Créer un nouveau customer
 
 		createCustomerRequest: function() {
-			var company = $('#POST-company').val();
-			var description = $('#POST-description').val();
-			var email = $('#POST-email').val();
-			var first_name = $('#POST-first_name').val();
-			var last_name = $('#POST-last_name').val();
-			var phone = $('#POST-phone').val();
-			var role = $('#POST-role').val();
-			$.post({
-				url: this.endpoint + '/createCustomer',
-				dataType: 'html',
-				data: {company: company, description: description, email: email, first_name: first_name, last_name: last_name, phone: phone, role: role}
-			})
-			.done(this.createCustomerDone.bind(this))
-			.fail(this.requestFail)
+			if ($('input').val() === "") {
+				alert("Merci de renseigner tous les champs");
+			} else {
+				var company = $('#POST-company').val();
+				var description = $('#POST-description').val();
+				var email = $('#POST-email').val();
+				var first_name = $('#POST-first_name').val();
+				var last_name = $('#POST-last_name').val();
+				var phone = $('#POST-phone').val();
+				var role = $('#POST-role').val();
+				$.post({
+					url: this.endpoint + '/createCustomer',
+					dataType: 'html',
+					data: {company: company, description: description, email: email, first_name: first_name, last_name: last_name, phone: phone, role: role}
+				})
+				.done(this.createCustomerDone.bind(this))
+				.fail(this.requestFail)
+			}
 		},
 
 		createCustomerDone: function() {
@@ -58,6 +63,7 @@
 			console.log("ok");
 		},
 
+		// Commun à toutes les requêtes
 		requestFail: function() {
 			console.log("fail");
 		}

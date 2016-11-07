@@ -25,6 +25,7 @@ app.post('/createCustomer', function(req, res) {
 		if (err) {
 			return console.log(err);
 		}
+		console.log(data);
 		res.send('got post request')
 
 		//Récupérer le JSON et le transformer en objet

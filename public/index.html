@@ -14,23 +14,36 @@
 
 			<div id="form">
 				
-				<form action="http://localhost:2000/createCustomer" method="post" onsubmit="return false">
-				<ul>
-					<li><label for="POST-company">Company :</label>
-					<input id="POST-company" type="text" name="company"></li>
-					<li><label for="POST-email">Email :</label>
-					<input id="POST-email" type="text" name="email"></li>
-					<li><label for="POST-first_name">First_name :</label>
-					<input id="POST-first_name" type="text" name="first_name"></li>
-					<li><label for="POST-last_name">Last_name :</label>
-					<input id="POST-last_name" type="text" name="last_name"></li>
-					<li><label for="POST-phone">Phone :</label>
-					<input id="POST-phone" type="text" name="phone"></li>
-					<li><label for="POST-role">Role :</label>
-					<input id="POST-role" type="text" name="role"></li>
-					<li><label for="POST-description">Description :</label>
-					<textarea id="POST-description" type="text" name="description"></textarea></li>
-					<li><button id="btnPost" class="ui green button">Save</button></li>
+				<form class="ui form" action="http://localhost:2000/createCustomer" method="post" onsubmit="return false">
+				<div class="field">
+					<label for="POST-company">Company :</label>
+					<input id="POST-company" type="text" name="company">
+				</div>
+				<div class="field">
+					<label for="POST-email">Email :</label>
+					<input id="POST-email" type="text" name="email">
+				</div>
+				<div class="field">
+					<label for="POST-first_name">First_name :</label>
+					<input id="POST-first_name" type="text" name="first_name">
+				</div>
+				<div class="field">
+					<label for="POST-last_name">Last_name :</label>
+					<input id="POST-last_name" type="text" name="last_name">
+				</div>
+				<div class="field">
+					<label for="POST-phone">Phone :</label>
+					<input id="POST-phone" type="text" name="phone">
+				</div>
+				<div class="field">
+					<label for="POST-role">Role :</label>
+					<input id="POST-role" type="text" name="role">
+				</div>
+				<div class="field">
+					<label for="POST-description">Description :</label>
+					<textarea id="POST-description" type="text" name="description"></textarea>
+				</div>
+					<button id="btnPost" class="ui blue button">Save</button>
 				</ul>
 				</form>
 				
@@ -43,7 +56,17 @@
 		</div>
 	</div>
 
+	<script id="template" type="text/template">
+		<div class="ui blue card">
+			<div><h3>{{first_name}} {{last_name}}</h3></div>
+			<div><h4>{{role}} - {{company}}</h4></div>
+			<div class="meta">{{email}} - {{phone}}</div>
+			<div class="description">{{description}}</div>
+		</div>
+	</script>
+
 	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="../node_modules/mustache/mustache.min.js"></script>
 	<script src="app.js"></script>
 	
 </body>
