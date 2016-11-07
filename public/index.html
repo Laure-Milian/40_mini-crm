@@ -14,14 +14,32 @@
 
 			<div id="form">
 				
-				<button class="ui teal button">blabla</button>
-
+				<form action="http://localhost:2000/createCustomer" method="post" onsubmit="return false">
+				<ul>
+					<li><label for="POST-company">Company :</label>
+					<input id="POST-company" type="text" name="company"></li>
+					<li><label for="POST-email">Email :</label>
+					<input id="POST-email" type="text" name="email"></li>
+					<li><label for="POST-first_name">First_name :</label>
+					<input id="POST-first_name" type="text" name="first_name"></li>
+					<li><label for="POST-last_name">Last_name :</label>
+					<input id="POST-last_name" type="text" name="last_name"></li>
+					<li><label for="POST-phone">Phone :</label>
+					<input id="POST-phone" type="text" name="phone"></li>
+					<li><label for="POST-role">Role :</label>
+					<input id="POST-role" type="text" name="role"></li>
+					<li><label for="POST-description">Description :</label>
+					<textarea id="POST-description" type="text" name="description"></textarea></li>
+					<li><button id="btnPost" class="ui green button">Save</button></li>
+				</ul>
+				</form>
+				
 			</div>
 			
 			<div id="data">
 				
 			</div>
-		
+
 		</div>
 	</div>
 
