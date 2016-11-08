@@ -16,32 +16,32 @@
 				
 				<form class="ui form" action="http://localhost:2000/createCustomer" method="post" onsubmit="return false">
 				<div class="field">
-					<label for="POST-company">Company :</label>
-					<input id="POST-company" type="text" name="company">
+					<label for="input1">Company :</label>
+					<input id="input1" type="text" name="company">
 				</div>
 				<div class="field">
-					<label for="POST-email">Email :</label>
-					<input id="POST-email" type="text" name="email">
+					<label for="input2">Email :</label>
+					<input id="input2" type="text" name="email">
 				</div>
 				<div class="field">
-					<label for="POST-first_name">First_name :</label>
-					<input id="POST-first_name" type="text" name="first_name">
+					<label for="input3">First_name :</label>
+					<input id="input3" type="text" name="first_name">
 				</div>
 				<div class="field">
-					<label for="POST-last_name">Last_name :</label>
-					<input id="POST-last_name" type="text" name="last_name">
+					<label for="input4">Last_name :</label>
+					<input id="input4" type="text" name="last_name">
 				</div>
 				<div class="field">
-					<label for="POST-phone">Phone :</label>
-					<input id="POST-phone" type="text" name="phone">
+					<label for="input5">Phone :</label>
+					<input id="input5" type="text" name="phone">
 				</div>
 				<div class="field">
-					<label for="POST-role">Role :</label>
-					<input id="POST-role" type="text" name="role">
+					<label for="input6">Role :</label>
+					<input id="input6" type="text" name="role">
 				</div>
 				<div class="field">
-					<label for="POST-description">Description :</label>
-					<textarea id="POST-description" type="text" name="description"></textarea>
+					<label for="input7">Description :</label>
+					<textarea id="input7" type="text" name="description"></textarea>
 				</div>
 					<button id="btnPost" class="ui blue button">Save</button>
 				</ul>
@@ -58,10 +58,20 @@
 
 	<script id="template" type="text/template">
 		<div class="ui blue card">
-			<div><h3>{{first_name}} {{last_name}}</h3></div>
+			<div><h3>{{first_name}} {{last_name}} </h3></div>
 			<div><h4>{{role}} - {{company}}</h4></div>
 			<div class="meta">{{email}} - {{phone}}</div>
 			<div class="description">{{description}}</div>
+			  <div class="extra content">
+				  <span class="left floated remove">
+				  <i class="large write icon"></i>
+					Modifier
+				  </span>
+				  <span class="right floated write">
+				  <i class="large remove icon"></i> 
+					Supprimer
+				  </span>
+			  </div>
 		</div>
 	</script>
 

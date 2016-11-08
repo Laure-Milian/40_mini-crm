@@ -2,7 +2,9 @@
 
 	var app = {
 
-		endpoint: 'http://localhost:2000', 
+		endpoint: 'http://localhost:2000',
+
+		fieldsComplete: false,
 		
 		init: function() {
 			this.displayCustomersRequest();
@@ -10,7 +12,11 @@
 		},
 
 		listeners: function() {
-			$("#btnPost").on('click', this.createCustomerRequest.bind(this));
+			$("#btnPost").on('click', this.checkIfFieldsEmpty.bind(this));
+			$("#icon").on('click', function(event) {
+				event.preventDefault();
+				console.log("clik boutnon");
+			});
 		},
 
 		// Afficher les customers existants
@@ -19,7 +25,7 @@
 			$('#data').html('');
 			$.ajax(this.endpoint + '/crm')
 			.done(this.displayCustomersDone)
-			.fail(this.requestFail)
+			.fail(this.requestFail);
 		},
 
 		displayCustomersDone: function(response) {
@@ -37,35 +43,56 @@
 
 		// Créer un nouveau customer
 
+		checkIfFieldsEmpty: function() {
+			for (var i = 0; i < 7; i++) {
+				if ($("#input"+ i).val() === "") {
+					this.fieldsComplete = false; 
+				} else {
+					this.fieldsComplete = true;
+				}
+			}
+			this.createCustomerRequest();
+		},
+
 		createCustomerRequest: function() {
-			if ($('input').val() === "") {
-				alert("Merci de renseigner tous les champs");
-			} else {
-				var company = $('#POST-company').val();
-				var description = $('#POST-description').val();
-				var email = $('#POST-email').val();
-				var first_name = $('#POST-first_name').val();
-				var last_name = $('#POST-last_name').val();
-				var phone = $('#POST-phone').val();
-				var role = $('#POST-role').val();
+			if (this.fieldsComplete) {
+				var company = $('#input1').val();
+				var email = $('#input2').val();
+				var first_name = $('#input3').val();
+				var last_name = $('#input4').val();
+				var phone = $('#input5').val();
+				var role = $('#input6').val();
+				var description = $('#input7').val();
+				
 				$.post({
 					url: this.endpoint + '/createCustomer',
 					dataType: 'html',
 					data: {company: company, description: description, email: email, first_name: first_name, last_name: last_name, phone: phone, role: role}
 				})
 				.done(this.createCustomerDone.bind(this))
-				.fail(this.requestFail)
+				.fail(this.requestFail);
+
+				$("input").val("");
+				$("textarea").val("");
+			} 
+			else {
+				alert("Merci de remplir tous les champs");					
 			}
 		},
 
 		createCustomerDone: function() {
 			this.displayCustomersRequest();
-			console.log("ok");
 		},
 
 		// Commun à toutes les requêtes
 		requestFail: function() {
 			console.log("fail");
+		},
+
+		// Supprimer un customer
+		deleteCustomer: function(event) {
+			event.preventDefault();
+			console.log("btn ok");
 		}
 
 	}

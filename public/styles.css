@@ -14,3 +14,12 @@
 	width: 600px;
 	margin-bottom: 50px;
 }
+
+.icon {
+	color: grey;
+}
+
+.icon:hover {
+	color: #0D71BB;
+	cursor: pointer;
+}
