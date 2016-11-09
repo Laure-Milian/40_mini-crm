@@ -13,8 +13,11 @@
 
 		listeners: function() {
 			$('#btnPost').on('click', this.checkIfFieldsEmpty.bind(this));
+		},
+
+		listenersDeleteModify: function() {
 			$('.delete_button').on('click', this.selectCustomerIDtoDelete);
-			$('.write_button').on('click', this.selectCustomerIDtoModify);
+			$('.write_button').on('click', this.selectCustomerIDtoModify);		
 		},
 
 		// Afficher les customers existants
@@ -37,14 +40,14 @@
 				$('#data').append(html);
 			}
 
-			app.listeners()
+			app.listenersDeleteModify();
 		},
 
 		// Créer un nouveau customer
 
 		checkIfFieldsEmpty: function() {
-			for (var i = 0; i < 7; i++) {
-				if ($("#input"+ i).val() === "" || $("textarea").val() === "") {
+			for (var i = 0; i < 8; i++) {
+				if ($("#input"+ i).val() === "") {
 					this.fieldsComplete = false; 
 				} else {
 					this.fieldsComplete = true;
@@ -104,7 +107,7 @@
 			this.displayCustomersRequest();
 		},
 
-		// Selection ID customer pour modification
+/*		// Selection ID customer pour modification
 		selectCustomerIDtoModify: function() {
 			var idCustomer = $(this).data('id');
 			app.modifyCustomer(idCustomer);
@@ -123,7 +126,7 @@
 
 		deleteCustomerDone: function() {
 			this.displayCustomersRequest();
-		},
+		},*/
 
 		// Commun à toutes les requêtes
 		requestFail: function() {
