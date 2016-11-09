@@ -12,11 +12,9 @@
 		},
 
 		listeners: function() {
-			$("#btnPost").on('click', this.checkIfFieldsEmpty.bind(this));
-			$("#icon").on('click', function(event) {
-				event.preventDefault();
-				console.log("clik boutnon");
-			});
+			$('#btnPost').on('click', this.checkIfFieldsEmpty.bind(this));
+			$('.delete_button').on('click', this.selectCustomerID);
+			$('.write_button').on('click', console.log('oKTOK'))
 		},
 
 		// Afficher les customers existants
@@ -39,13 +37,15 @@
 				var html = Mustache.to_html(template, response.customers[i]);
 				$('#data').append(html);
 			}
+
+			app.listeners()
 		},
 
 		// Créer un nouveau customer
 
 		checkIfFieldsEmpty: function() {
 			for (var i = 0; i < 7; i++) {
-				if ($("#input"+ i).val() === "") {
+				if ($("#input"+ i).val() === "" || $("textarea").val() === "") {
 					this.fieldsComplete = false; 
 				} else {
 					this.fieldsComplete = true;
@@ -84,16 +84,32 @@
 			this.displayCustomersRequest();
 		},
 
-		// Commun à toutes les requêtes
-		requestFail: function() {
-			console.log("fail");
+		// Selection ID customer pour suppression ou modification
+		selectCustomerID: function() {
+			var idCustomer = $(this).data('id');
+			app.deleteCustomer(idCustomer);
 		},
 
 		// Supprimer un customer
-		deleteCustomer: function(event) {
-			event.preventDefault();
-			console.log("btn ok");
+		deleteCustomer: function(id) {
+			$.ajax({
+				url: this.endpoint + '/deleteCustomer',
+				type: 'DELETE',
+				data: {id: id}
+			})
+			.done(this.deleteCustomerDone.bind(this))
+			.fail(this.requestFail);
+		},
+
+		deleteCustomerDone: function() {
+			this.displayCustomersRequest();
+		},
+
+		// Commun à toutes les requêtes
+		requestFail: function() {
+			console.log("fail");
 		}
+
 
 	}
 	
