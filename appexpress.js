@@ -62,11 +62,24 @@ app.delete('/deleteCustomer', function(req, res) {
 		var idSelectedCustomer = parseInt(req.body.id, 10);
 		var len = dataObject.customers.length;
 		for (var i = 0; i < len; i++) {
+
 			if (dataObject.customers[i].id === idSelectedCustomer) {
-				console.log("doit apparaitre une fois UNE FOIS");
+
+				//Supprimer le customer sélectionné de l'array
+				dataObject.customers.splice(i, 1);
+
+				//Retransformer l'objet en string
+				var newData = JSON.stringify(dataObject);
+
+			 	//Modifier le fichier
+			 	fs.writeFile('public/crm.json', newData, 'utf8', function(err, data){
+			 		if (err) {
+			 			return console.log(err);
+			 		}
+			 	});
 			}
+
 		}
-	//	if (req.body.id === dataObject.customers.id) {
 
 	})
 })

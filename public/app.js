@@ -13,8 +13,8 @@
 
 		listeners: function() {
 			$('#btnPost').on('click', this.checkIfFieldsEmpty.bind(this));
-			$('.delete_button').on('click', this.selectCustomerID);
-			$('.write_button').on('click', console.log('oKTOK'))
+			$('.delete_button').on('click', this.selectCustomerIDtoDelete);
+			$('.write_button').on('click', this.selectCustomerIDtoModify);
 		},
 
 		// Afficher les customers existants
@@ -27,7 +27,6 @@
 		},
 
 		displayCustomersDone: function(response) {
-			console.log(response);
 			// Mustache
 			var template = $('#template').html();
 
@@ -84,14 +83,35 @@
 			this.displayCustomersRequest();
 		},
 
-		// Selection ID customer pour suppression ou modification
-		selectCustomerID: function() {
+		// Selection ID customer pour suppression
+		selectCustomerIDtoDelete: function() {
 			var idCustomer = $(this).data('id');
 			app.deleteCustomer(idCustomer);
 		},
 
 		// Supprimer un customer
 		deleteCustomer: function(id) {
+			$.ajax({
+				url: this.endpoint + '/deleteCustomer',
+				type: 'DELETE',
+				data: {id: id}
+			})
+			.done(this.deleteCustomerDone.bind(this))
+			.fail(this.requestFail);
+		},
+
+		deleteCustomerDone: function() {
+			this.displayCustomersRequest();
+		},
+
+		// Selection ID customer pour modification
+		selectCustomerIDtoModify: function() {
+			var idCustomer = $(this).data('id');
+			app.modifyCustomer(idCustomer);
+		},
+
+		// Modifier un customer
+		modifyCustomer: function(id) {
 			$.ajax({
 				url: this.endpoint + '/deleteCustomer',
 				type: 'DELETE',
